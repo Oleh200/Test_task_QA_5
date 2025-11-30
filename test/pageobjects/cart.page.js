@@ -1,5 +1,3 @@
-import { browser, expect } from "@wdio/globals";
-
 class CartPage {
   get cartItem() {
     return $(".inventory_item_name");
@@ -131,4 +129,5 @@ class CartPage {
     await expect(this.errorEmptyCartMessage).toHaveText("Cart is empty");
   }
 }
-export default new CartPage();
+
+export const cartPage = new CartPage();

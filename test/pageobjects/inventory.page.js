@@ -1,5 +1,3 @@
-import { expect } from "@wdio/globals";
-
 class InventoryPage {
   get productsTitle() {
     return $(".title");
@@ -54,7 +52,7 @@ class InventoryPage {
   }
 
   get sortDropdown() {
-    return $('[data-test="product-sort-container"]');
+    return $(".product_sort_container");
   }
 
   async verifyInventoryPageOpened(value) {
@@ -95,7 +93,8 @@ class InventoryPage {
   }
 
   async selectSort(optionValue) {
-    await this.sortDropdown.selectByAttribute("value", optionValue);
+    const dropdown = await this.sortDropdown;
+    await dropdown.selectByAttribute("value", optionValue);
   }
 
   async getNames() {
@@ -117,8 +116,15 @@ class InventoryPage {
     return prices;
   }
 
+  async sortAndCheck(optionValue, getElementsFn, compareFn, expectSortedFn) {
+    await this.selectSort(optionValue);
+    const values = await getElementsFn.call(this);
+    expectSortedFn(values, compareFn);
+  }
+
   async verifyIconCartEmpty() {
     await expect(this.cartBadge).not.toBeExisting();
   }
 }
-export default new InventoryPage();
+
+export const inventoryPage = new InventoryPage();

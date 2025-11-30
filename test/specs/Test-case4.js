@@ -1,22 +1,21 @@
-import LoginPage from "../pageobjects/login.page.js";
-import InventoryPage from "../pageobjects/inventory.page.js";
-import { expect } from "@wdio/globals";
+import { loginPage } from "../pageobjects/login.page.js";
+import { inventoryPage } from "../pageobjects/inventory.page.js";
 
 describe("Test-case 004", () => {
-  it("Logout", async () => {
-    //Precondtion:
-    await LoginPage.goto();
-    await LoginPage.setUsernameInput("standard_user");
-    await LoginPage.setPasswordInput("secret_sauce");
-    await LoginPage.clickLoginButton();
-    await browser.pause(2000);
+  //Precondtion:
+  beforeEach(async () => {
+    await loginPage.goto();
+    await loginPage.setUsernameInput("standard_user");
+    await loginPage.setPasswordInput("secret_sauce");
+    await loginPage.clickLoginButton();
+  });
 
-    //Test_steps
-    await InventoryPage.clickBurgerButton();
-    await InventoryPage.verifyMenuExpanded();
-    await InventoryPage.verifyAllItemDisplayed();
-    await InventoryPage.clickLogoutItem();
-    await LoginPage.verifyUserOnLoginPage();
-    await browser.pause(2000);
+  it("Logout", async () => {
+    //Test_steps:
+    await inventoryPage.clickBurgerButton();
+    await inventoryPage.verifyMenuExpanded();
+    await inventoryPage.verifyAllItemDisplayed();
+    await inventoryPage.clickLogoutItem();
+    await loginPage.verifyUserOnLoginPage();
   });
 });

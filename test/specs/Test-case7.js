@@ -1,19 +1,19 @@
-import LoginPage from "../pageobjects/login.page.js";
-import Footer_InventoryPage from "../pageobjects/footer_inventory.page.js";
-import { expect } from "@wdio/globals";
+import { loginPage } from "../pageobjects/login.page.js";
+import { footerInventoryPage } from "../pageobjects/footerinventory.page.js";
 
 describe("Test-case 007", () => {
-  it("Footer Links", async () => {
-    //Precondtion:
-    await LoginPage.goto();
-    await LoginPage.setUsernameInput("standard_user");
-    await LoginPage.setPasswordInput("secret_sauce");
-    await LoginPage.clickLoginButton();
-    await browser.pause(2000);
+  //Precondtion:
+  beforeEach(async () => {
+    await loginPage.goto();
+    await loginPage.setUsernameInput("standard_user");
+    await loginPage.setPasswordInput("secret_sauce");
+    await loginPage.clickLoginButton();
+  });
 
-    //Test_steps
-    await Footer_InventoryPage.verifyOpenTwitterInNewTab();
-    await Footer_InventoryPage.verifyOpenFacebookInNewTab();
-    await Footer_InventoryPage.verifyOpenLinkedinInNewTab();
+  it("Footer Links", async () => {
+    //Test_steps:
+    await footerInventoryPage.verifyOpenTwitterInNewTab();
+    await footerInventoryPage.verifyOpenFacebookInNewTab();
+    await footerInventoryPage.verifyOpenLinkedinInNewTab();
   });
 });

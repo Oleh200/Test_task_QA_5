@@ -1,6 +1,4 @@
-import { expect } from "@wdio/globals";
-
-class Footer_InventoryPage {
+class FooterInventoryPage {
   get twitterIcon() {
     return $(".social_twitter");
   }
@@ -44,4 +42,5 @@ class Footer_InventoryPage {
     );
   }
 }
-export default new Footer_InventoryPage();
+
+export const footerInventoryPage = new FooterInventoryPage();

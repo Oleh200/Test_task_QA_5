@@ -1,5 +1,3 @@
-import { expect } from "@wdio/globals";
-
 class LoginPage {
   get inputUsername() {
     return $("#user-name");
@@ -64,4 +62,4 @@ class LoginPage {
   }
 }
 
-export default new LoginPage();
+export const loginPage = new LoginPage();
